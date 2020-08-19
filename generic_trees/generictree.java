@@ -208,13 +208,26 @@ public class generictree {
         if (root.children.size() == 0) {
             return null;
         }
-        for (int i = root.children.size() - 1; i >= 0; i--) {
+        for (int i = root.children.size() - 1; i >= 0; i--) {   //loop is reverse because if we remove one element form arraylist all that list ele shifts to front by one for more see sumit sir video GT
             TreeNode c = removeLeaves2(root.children.get(i));
             if (c == null)
                 root.children.remove(root.children.get(i));
         }
 
         return root;
+    }
+
+    public static void removeLeaves3(TreeNode root) {
+        for (int i = root.children.size() - 1; i >= 0; i--) {// approach 3 => firstly we remove leaves of root then we assume that children will remove their leaves.
+            TreeNode child = root.children.get(i);
+
+            if (child.children.size() == 0)
+                root.children.remove(child);
+        }
+
+        for (TreeNode child : root.children)
+            removeLeaves3(child);
+
     }
 
     public static void linearise(TreeNode root) { // O(n2)

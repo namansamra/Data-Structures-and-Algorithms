@@ -1,7 +1,5 @@
 import java.util.*;
 
-import jdk.nashorn.api.tree.Tree;
-
 public class binaryPrac {
 
     public static class TreeNode {
@@ -160,6 +158,34 @@ public class binaryPrac {
         int right_max = max(root.right);
 
         return Math.max(root.val, Math.max(left_max, right_max));
+    }
+
+
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<pair> st = new Stack<>();
+        st.push(new pair(root, -1));
+        if (root == null)
+            return list;
+
+        while (st.size() != 0) {
+            pair top = st.peek();
+            if (top.state == -1) {
+                if (top.node.left != null) {
+                    st.push(new pair(top.node.left, -1));
+                }
+                top.state++;
+            } else if (top.state == 0) {
+                list.add(top.node.val);
+                if (top.node.right != null) {
+                    st.push(new pair(top.node.right, -1));
+                }
+                top.state++;
+            } else {
+                st.pop();
+            }
+        }
+        return list;
     }
 
     public static ArrayList<Integer> node_to_root_path(TreeNode root, int data) {

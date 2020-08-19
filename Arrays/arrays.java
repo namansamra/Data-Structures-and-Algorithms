@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.*;
 
+
 public class arrays {
     public static Scanner scn = new Scanner(System.in);
 
